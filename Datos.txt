@@ -1,6 +1,0 @@
-Los datos a Utilizar:
-Articulos
-Usuario
-Comentarios
-Compra
-Estados

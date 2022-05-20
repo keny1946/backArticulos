@@ -1,0 +1,41 @@
+Los datos a Utilizar:
+Articulos = [
+    titulo_articulo
+    descripcion
+    valor
+    imagen
+]
+
+tiposArticulos = [
+    nombre_articulo
+]
+
+estadoArticulo = [
+    nombre_estado
+]
+
+Usuario = [
+    imagen_usuario
+    nombres
+    apellidos
+    correo electronico
+    contraseña
+]
+
+estadoUsuario = [
+    nombre_estado
+]
+
+Comentarios = [
+    nombreUsuario => usuario
+    descripcion_comentario
+]
+
+Compra = [
+    Nombre => articulo
+    valor => articulo
+    descripcion => articulo
+    nombreVendedor => usuario
+    nombreComprador => usuario
+]
+
