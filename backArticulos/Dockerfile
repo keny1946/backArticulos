@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip\
+    && docker-php-ext-configure pdo_mysql --with-pdo-mysql-mysqlnd
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
