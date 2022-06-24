@@ -1,0 +1,52 @@
+pipeline{
+    agent any
+    stages{
+        stage('build'){
+            steps{
+                sh 'php --version'
+                sh 'composer install'
+                sh 'composer --version'
+                sh 'cp .env.example .env'
+                sh 'php artisan key:generate'
+            }
+        }
+        stage('Prueba Unitaria'){
+            steps{
+                sh 'php artisan test'
+            }
+        }
+        stage('docker build'){
+            steps{
+                sh 'docker rmi duque946/laravel8cdpart2'
+                sh 'docker build -t duque946/laravel8cdpart2 --no-cache.'
+            }
+        }
+        stage('docker push'){
+            environment{
+                DOCKER_USERNAME = credential('docker-user')
+                DOCKER_PASSWORD = credential('docker-password')
+            }
+            steps{
+                sh 'docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}'
+                sh 'docker push duque946/laravel8cdpart2'
+            }
+        }
+        stage('despliegue pruebas'){
+            steps{
+                sh 'docker run -d --rm -p 80:80 --name laravel8cd duque946/laravel8cd'
+            }
+
+        }
+        stage('aceptar las pruebas'){
+            steps{
+                sleep 20
+                sh 'chmod +x acceptance_test.sh && ./acceptance_test.sh'
+            }
+            post{
+                always{
+                    sh 'docker stop laravel8cd'
+                }
+            }
+        }
+    }
+}

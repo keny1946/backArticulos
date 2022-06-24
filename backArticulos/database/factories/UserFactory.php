@@ -17,12 +17,17 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $imagenTest = "imagen.png";
+        $idEstadoUsuario = 1;
         return [
-            'name' => $this->faker->name(),
+            'imagen_usuario' => $this->faker->$imagenTest,
+            'nombres'=>$this->faker->name(),
+            'apellidos' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'idEstadoUsuario'=> $this->faker->$idEstadoUsuario
         ];
     }
 
