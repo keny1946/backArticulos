@@ -9,7 +9,7 @@ services:
 - mysql
 
 before_script:
-- cp b.env.example .env
+- cp backArticulos/.env.example .env
 - mysql -e "create database backarticulos"
 - composer self-update
 - composer install --no-interaction --prefer-source
